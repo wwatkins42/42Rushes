@@ -24,23 +24,12 @@ enum { HUMAN, AI };
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 # define MAX_DEPTH 2
-
 # define COLR_BLUE "\e[34m"
 # define COLR_END "\e[0m"
 
-typedef struct	s_tree
-{
-	int				type;
-	int				weight;
-	struct s_tree	**node;
-}				t_tree;
-
 typedef struct	s_env
 {
-	t_tree	*tree;
 	char	**board;
-	char	**constant;
-	char	**copy;
 	int		*moves;
 	int		width;
 	int		height;
