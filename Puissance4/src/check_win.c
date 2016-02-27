@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_victory.c                                    :+:      :+:    :+:   */
+/*   check_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/27 12:12:20 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 13:27:10 by wwatkins         ###   ########.fr       */
+/*   Created: 2016/02/27 14:12:02 by wwatkins          #+#    #+#             */
+/*   Updated: 2016/02/27 17:06:28 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int		check_win(t_env *e, short player)
 		i = -1;
 		while (++i < e->width)
 		{
-			if (i < e->width - 4 && e->board[j][i] != '.')
+			if (i < e->width - 3 && e->board[j][i] != '.')
 				if (check_horizontal(e, i, j, e->board[j][i]))
 					return (1);
-			if (j < e->height - 4 && e->board[j][i] != '.')
+			if (j < e->height - 3 && e->board[j][i] != '.')
 				if (check_vertical(e, i, j, e->board[j][i]))
 					return (1);
-			if (j < e->height - 4 && i > 4 && e->board[j][i] != '.')
+			if (j < e->height - 3 && i > 3 && e->board[j][i] != '.')
 				if (check_diagonal_left(e, i, j, e->board[j][i]))
 					return (1);
-			if (j < e->height - 4 && i < e->width - 4 && e->board[j][i] != '.')
+			if (j < e->height - 3 && i < e->width - 3 && e->board[j][i] != '.')
 				if (check_diagonal_right(e, i, j, e->board[j][i]))
 					return (1);
 		}

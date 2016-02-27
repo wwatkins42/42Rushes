@@ -6,7 +6,7 @@
 #    By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/27 09:09:22 by wwatkins          #+#    #+#              #
-#    Updated: 2016/02/27 12:07:09 by wwatkins         ###   ########.fr        #
+#    Updated: 2016/02/27 17:29:23 by wwatkins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = puissance4
 CC = gcc
 CFLGS = -Werror -Wextra -Wall
 
-SRC_NAME = main.c utils.c core.c check_victory.c
+SRC_NAME = main.c utils.c core.c check_win.c ai.c evaluate.c
 OBJ_NAME = $(SRC_NAME.c=.o)
 LIB_NAME = libft.a
 

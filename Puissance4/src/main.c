@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:03:42 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 11:50:48 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/27 16:55:10 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 		ft_putstr("error\n");
 		return (0);
 	}
-	board_disp(&e);
+	board_disp(&e, e.board);
 	game_loop(&e);
 	return (0);
 }
@@ -52,4 +52,15 @@ int		args_get(t_env *e, int argc, char **argv)
 	e->width > 100 ? e->width = 100 : 0;
 	e->height > 100 ? e->height = 100 : 0;
 	return (1);
+}
+
+int     str_isdigit(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (ft_isdigit(str[i]) == 0)
+			return (-1);
+	return (0);
 }
