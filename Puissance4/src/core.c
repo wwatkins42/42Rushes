@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 11:11:40 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 12:06:41 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/27 14:08:31 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		game_loop(t_env *e)
 	e->game = 1;
 	srand(time(NULL));
 	random = (rand() % 2);
-	if (random)
-	{
+//	if (random)
+//	{
 		turn_player(e);
-		turn_ia(e);
-	}
-	else
-		turn_ia(e);
+//		turn_ia(e);
+//	}
+//	else
+//		turn_ia(e);
 	while (e->game)
 	{
 		turn_player(e);
@@ -37,6 +37,7 @@ int		game_loop(t_env *e)
 int		turn_player(t_env *e)
 {
 	get_input(e);
+	board_insert(e, HUMAN);
 	board_disp(e);
 	check_win(e, HUMAN);
 	return (0);
@@ -44,7 +45,8 @@ int		turn_player(t_env *e)
 
 int		turn_ia(t_env *e)
 {
-	ai_algorithm();
+//	ai_algorithm();
+	board_insert(e, AI);
 	board_disp(e);
 	check_win(e, AI);
 	return (0);

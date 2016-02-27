@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 12:20:47 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/27 13:45:03 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_tree
 typedef struct	s_env
 {
 	t_tree	*tree;
-	int		**board;
+	char	**board;
 	int		width;
 	int		height;
 	int		input;
@@ -55,6 +55,7 @@ int				args_get(t_env *e, int argc, char **argv);
 */
 
 int				board_create(t_env *e);
+int				board_insert(t_env *e, short player);
 int				board_disp(t_env *e);
 void			set_color(int i);
 int				str_isdigit(char *str);
@@ -73,5 +74,9 @@ int				get_input(t_env *e);
 */
 
 int				check_win(t_env *e, short player);
+int				check_horizontal(t_env *e, int i, int j, char c);
+int				check_vertical(t_env *e, int i, int j, char c);
+int				check_diagonal_left(t_env *e, int i, int j, char c);
+int				check_diagonal_right(t_env *e, int i, int j, char c);
 
 #endif
