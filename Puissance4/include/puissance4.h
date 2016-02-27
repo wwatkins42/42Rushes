@@ -19,13 +19,13 @@
 # include <time.h>
 # include <stdio.h> // TEMP
 
-enum { HUMAN, AI };
-
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
-# define MAX_DEPTH 2
 # define COLR_BLUE "\e[34m"
 # define COLR_END "\e[0m"
+# define MAX_DEPTH 2
+
+enum { HUMAN, AI };
 
 typedef struct	s_env
 {
@@ -34,8 +34,8 @@ typedef struct	s_env
 	int		width;
 	int		height;
 	int		input;
-	short	game;
 	int		j;
+	short	game;
 }				t_env;
 
 /*
