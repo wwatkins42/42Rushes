@@ -19,6 +19,44 @@ int		ai_algorithm(t_env *e)
 	input = minimax(e, 0, 0, MAX_DEPTH, 1);
 	return (input);
 }
+
+int		minimax(t_env *e, int move, int j, int depth, int maximizing)
+{
+	int	i;
+	int	v;
+	int	best_value;
+
+	i = 0;
+	if (depth == 0 || check_win(e, AI))
+		return (evaluate(e, j, move));
+	if (maximizing)
+	{
+		best_value = -1000;
+		while (i < e->width)
+		{
+			depth != MAX_DEPTH ? j = board_insert(e, move, e->board, HUMAN) : 0;
+			v = minimax(e, i, j, depth - 1, 0);
+			best_value = (best_value > v ? best_value : v);
+			board_delete(e, j, move, e->board);
+			i++;
+		}
+		return (best_value);
+	}
+	else
+	{
+		best_value = 1000;
+		while (i < e->width)
+		{
+			depth != MAX_DEPTH ? j = board_insert(e, move, e->board, AI) : 0;
+			v = minimax(e, i, j, depth - 1, 1);
+			best_value = (best_value < v ? best_value : v);
+			board_delete(e, j, move, e->board);
+			i++;
+		}
+		return (best_value);
+	}
+}
+
 /*
 int		minimax(t_env *e, int depth)
 {
@@ -92,43 +130,3 @@ int		max(t_env *e, int move, int depth)
 	}
 	return (v_max);
 }*/
-
-int		minimax(t_env *e, int move, int j, int depth, int maximizing)
-{
-	int	i;
-	int	v;
-	int	best_value;
-
-	if (depth == 0 || check_win(e, AI))
-		return (evaluate(e, j, move));
-	if (maximizing)
-	{
-		depth != MAX_DEPTH ? j = board_insert(e, move, e->board, HUMAN) : 0;
-		i = 0;
-		best_value = -1000;
-		while (i < e->width)
-		{
-			v = minimax(e, i, j, depth - 1, 0);
-			best_value = (best_value > v ? best_value : v);
-			i++;
-		}
-		board_disp(e, e->board);
-		board_delete(e, j, move, e->board);
-		return (best_value);
-	}
-	else
-	{
-		depth != MAX_DEPTH ? j = board_insert(e, move, e->board, AI) : 0;
-		i = 0;
-		best_value = 1000;
-		while (i < e->width)
-		{
-			v = minimax(e, i, j, depth - 1, 1);
-			best_value = (best_value < v ? best_value : v);
-			i++;
-		}
-		board_disp(e, e->board);
-		board_delete(e, j, move, e->board);
-		return (best_value);
-	}
-}
