@@ -34,7 +34,7 @@ int		minimax(t_env *e, int move, int j, int depth, int maximizing)
 		best_value = -1000;
 		while (i < e->width)
 		{
-			depth != MAX_DEPTH ? j = board_insert(e, move, e->board, HUMAN) : 0;
+			j = board_insert(e, i, e->board, AI);
 			v = minimax(e, i, j, depth - 1, 0);
 			best_value = (best_value > v ? best_value : v);
 			board_delete(e, j, move, e->board);
@@ -47,7 +47,7 @@ int		minimax(t_env *e, int move, int j, int depth, int maximizing)
 		best_value = 1000;
 		while (i < e->width)
 		{
-			depth != MAX_DEPTH ? j = board_insert(e, move, e->board, AI) : 0;
+			j = board_insert(e, i, e->board, HUMAN);
 			v = minimax(e, i, j, depth - 1, 1);
 			best_value = (best_value < v ? best_value : v);
 			board_delete(e, j, move, e->board);
