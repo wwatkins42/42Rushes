@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 19:44:29 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:33:17 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		ai_algorithm(t_env *e)
 	int	input;
 
 	input = minimax(e, MAX_DEPTH);
+	board_insert(e, input, 2);
 	return (input);
 }
 
@@ -35,7 +36,6 @@ int		minimax(t_env *e, int depth)
 		{
 			board_insert(e, i, 2);
 			v = min(e, 1, depth);
-			printf("%d: %d\n", i, v);
 			if (v > bestvalue)
 			{
 				bestvalue = v;
@@ -44,7 +44,13 @@ int		minimax(t_env *e, int depth)
 			board_delete(e, i);
 		}
 	}
-	board_insert(e, move, 2);
+	if (bestvalue == -MAX_VALUE)
+	{
+		i = 0;
+		while (e->board[0][i] != '.')
+			i++;
+		move = i;
+	}
 	return (move);
 }
 
@@ -69,7 +75,7 @@ int		min(t_env *e, int p, int depth)
 				board_insert(e, i, p);
 				e->prev = i;
 				v = max(e, p % 2 + 1, depth - 1);
-				vmin = (vmin < v ? vmin : v);
+				vmin = (v < vmin ? v : vmin);
 				board_delete(e, i);
 			}
 			i++;
@@ -91,7 +97,7 @@ int		max(t_env *e, int p, int depth)
 		return (MAX_VALUE - (MAX_DEPTH - depth) * 10);
 	else
 	{
-		v = -MAX_VALUE;
+		vmax = -MAX_VALUE;
 		while (i < e->width)
 		{
 			if (e->board[0][i] == '.')
@@ -99,7 +105,7 @@ int		max(t_env *e, int p, int depth)
 				board_insert(e, i, p);
 				e->prev = i;
 				v = min(e, p % 2 + 1, depth - 1);
-				vmax = (vmax > v ? vmax : v);
+				vmax = (v > vmax ? v : vmax);
 				board_delete(e, i);
 			}
 			i++;

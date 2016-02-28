@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 19:30:24 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:30:24 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int				max(t_env *e, int p, int depth);
 */
 
 int				evaluate(t_env *e);
-int				count_horizontal(t_env *e, int i, int j);
-int				count_vertical(t_env *e, int i, int j);
-int				count_diagonal_left(t_env *e, int i, int j);
-int				count_diagonal_right(t_env *e, int i, int j);
+int				count_horizontal(t_env *e, int i, int j, int weight);
+int				count_vertical(t_env *e, int i, int j, int weight);
+int				count_diagonal_left(t_env *e, int i, int j, int weight);
+int				count_diagonal_right(t_env *e, int i, int j, int weight);
 
 #endif
