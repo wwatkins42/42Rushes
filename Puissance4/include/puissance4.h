@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 21:33:36 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 22:14:57 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define MIN_INT -2147483648
 # define COLR_BLUE "\e[34m"
 # define COLR_RED "\e[31m"
-# define COLR_YELLOW "\e[33m"
+# define COLR_YELLOW "\e[93m"
+# define COLR_GRAY "\e[90m"
 # define COLR_END "\e[0m"
 # define MAX_DEPTH 5
 # define MAX_VALUE 1000
@@ -36,7 +37,8 @@ typedef struct	s_env
 	int		h;
 	int		j;
 	int		input;
-	short	game;
+	int		counter_hu;
+	int		counter_ai;
 }				t_env;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:03:42 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 21:33:13 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 22:10:35 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		args_get(t_env *e, int argc, char **argv)
 		return (-1);
 	e->w > 100 ? e->w = 100 : 0;
 	e->h > 100 ? e->h = 100 : 0;
+	e->counter_hu = 21;
+	e->counter_ai = 21;
 	return (0);
 }
 
