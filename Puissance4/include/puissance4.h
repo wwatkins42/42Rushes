@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:30:24 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:45:29 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct	s_env
 	int		height;
 	int		input;
 	int		j;
-	int		prev;
 	short	game;
 }				t_env;
 
@@ -82,10 +81,10 @@ int				check_diagonal_right(t_env *e, int i, int j, char c);
 **	ai.c
 */
 
-int				ai_algorithm(t_env *e);
 int				minimax(t_env *e, int depth);
 int				min(t_env *e, int p, int depth);
 int				max(t_env *e, int p, int depth);
+int				displace(t_env *e, int bestvalue, int move);
 
 /*
 **	evaluate.c

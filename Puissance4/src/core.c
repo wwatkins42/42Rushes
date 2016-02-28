@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 11:11:40 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:24:27 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:46:26 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		turn_player(t_env *e)
 
 int		turn_ia(t_env *e)
 {
-	ai_algorithm(e);
+	board_insert(e, minimax(e, MAX_DEPTH), 2);
 	board_disp(e, e->board);
 	if (check_win(e, 2) == 1)
 		exit(0);
