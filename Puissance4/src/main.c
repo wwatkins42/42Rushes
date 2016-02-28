@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:03:42 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:57:49 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 21:33:13 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		main(int argc, char **argv)
 		ft_putstr("error\n");
 		return (0);
 	}
-	board_disp(&e, e.board);
 	game_loop(&e);
 	return (0);
 }
@@ -63,4 +62,13 @@ int		str_isdigit(char *str)
 		if (ft_isdigit(str[i]) == 0)
 			return (-1);
 	return (0);
+}
+
+void	set_color(int i)
+{
+	i /= 10;
+	if (i == 0)
+		return ;
+	if (i % 2 == 1)
+		ft_putstr(COLR_BLUE);
 }

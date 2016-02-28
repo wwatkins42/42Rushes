@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 21:02:13 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 21:33:36 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define MAX_DEPTH 5
 # define MAX_VALUE 1000
 
+enum { HUMAN, AI, NONE };
+
 typedef struct	s_env
 {
 	char	**board;
@@ -43,6 +45,7 @@ typedef struct	s_env
 
 int				args_get(t_env *e, int argc, char **argv);
 int				str_isdigit(char *str);
+void			set_color(int i);
 
 /*
 **	utils.c
@@ -51,8 +54,8 @@ int				str_isdigit(char *str);
 int				board_create(t_env *e);
 void			board_insert(t_env *e, int input, int p);
 void			board_delete(t_env *e, int input);
-void			board_disp(t_env *e, char **board);
-void			set_color(int i);
+void			board_disp(t_env *e);
+int				board_complete(t_env *e);
 
 /*
 **	core.c
@@ -62,6 +65,7 @@ int				game_loop(t_env *e);
 int				turn_player(t_env *e);
 int				turn_ia(t_env *e);
 int				get_input(t_env *e);
+void			disp_win(t_env *e, int player);
 
 /*
 **	check_win.c

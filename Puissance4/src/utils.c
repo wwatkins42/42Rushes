@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:34:27 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 21:04:01 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 21:25:55 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	board_delete(t_env *e, int input)
 	e->board[j][input] = '.';
 }
 
-void	board_disp(t_env *e, char **board)
+void	board_disp(t_env *e)
 {
 	int	i;
 	int	j;
@@ -73,9 +73,9 @@ void	board_disp(t_env *e, char **board)
 			}
 			else
 			{
-				board[j - 1][i] == 'X' ? ft_putstr(COLR_RED) : 0;
-				board[j - 1][i] == 'O' ? ft_putstr(COLR_YELLOW) : 0;
-				ft_putchar(board[j - 1][i]);
+				e->board[j - 1][i] == 'X' ? ft_putstr(COLR_RED) : 0;
+				e->board[j - 1][i] == 'O' ? ft_putstr(COLR_YELLOW) : 0;
+				ft_putchar(e->board[j - 1][i]);
 			}
 			ft_putstr(COLR_END);
 			i < e->w - 1 ? ft_putstr("  ") : 0;
@@ -84,11 +84,20 @@ void	board_disp(t_env *e, char **board)
 	}
 }
 
-void	set_color(int i)
+int		board_complete(t_env *e)
 {
-	i /= 10;
-	if (i == 0)
-		return ;
-	if (i % 2 == 1)
-		ft_putstr(COLR_BLUE);
+	int	i;
+	int	j;
+
+	j = -1;
+	while (++j < e->h)
+	{
+		i = -1;
+		while (++i < e->w)
+		{
+			if (e->board[j][i] == '.')
+				return (0);
+		}
+	}
+	return (1);
 }
