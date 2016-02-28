@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 17:17:27 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 18:15:34 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ai_algorithm(t_env *e)
 
 	input = minimax(e, MAX_DEPTH);
 	board_insert(e, input, 2);
-	return (0);
+	return (input);
 }
 
 int		minimax(t_env *e, int depth)
@@ -36,6 +36,7 @@ int		minimax(t_env *e, int depth)
 		{
 			board_insert(e, i, 1);
 			v = min(e, 2, depth);
+			printf("%d: %d\n", i, v);
 			if (v > bestvalue)
 			{
 				bestvalue = v;
@@ -55,10 +56,9 @@ int		min(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 && check_win(e, p) == 0)
-		return (0);
-		//return(evaluate(e, e->prev));
+		return(-evaluate(e, p));
 	else if (check_win(e, p) == p)
-		return (-MAX_VALUE + (MAX_DEPTH - depth));
+		return (-MAX_VALUE + (MAX_DEPTH - depth) * 10);
 	else
 	{
 		vmin = MAX_VALUE;
@@ -86,10 +86,9 @@ int		max(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 && check_win(e, p) == 0)
-		return (0);
-		//return(evaluate(e, e->prev));
-	else if (check_win(e, p) == p)
-		return (MAX_VALUE - (MAX_DEPTH - depth));
+		return(evaluate(e, p));
+	else if (depth >= 0 && check_win(e, p) == p)
+		return (MAX_VALUE - (MAX_DEPTH - depth) * 10);
 	else
 	{
 		v = -MAX_VALUE;

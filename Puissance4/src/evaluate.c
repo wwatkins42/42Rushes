@@ -6,53 +6,126 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 17:19:33 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 17:14:46 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 18:17:18 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "puissance4.h"
 
-int		evaluate(t_env *e, int move)
+int		evaluate(t_env *e, int p)
 {
+	int		i;
 	int		j;
 	int     weight;
-
-	weight = 0;
-	j = get_height(e, move);
-	weight = weight_horizontal(e, j, move);
-	return (weight);
-}
-
-int		get_height(t_env *e, int move)
-{
-	int	j;
-
-	j = 0;
-	while (j < e->height - 1)
-	{
-		if (e->board[j][move] != '.')
-			break ;
-		j++;
-	}
-	return (j);
-}
-
-int		weight_horizontal(t_env *e, int j, int move)
-{
-	int		weight;
 	char	c;
 
-	c = e->board[j][move];
-	weight = 1;
-	if (move > 1 && e->board[j][move - 1] == c)
-		weight *= 10;
-	if (move > 2 && e->board[j][move - 1] == c &&
-		e->board[j][move - 2] == c)
-		weight *= 10;
-	if (move < e->width - 1 && e->board[j][move + 1] == c)
-		weight *= 10;
-	if (move < e->width - 2 && e->board[j][move + 1] == c &&
-		e->board[j][move + 2] == c)
-		weight *= 10;
+	c = (p == 1 ? 'O' : 'X');
+	weight = 0;
+	i = 0;
+	while (i < e->width)
+	{
+		j = 0;
+		while (j < e->height - 1 && e->board[j][i] == '.')
+		{
+			j++;
+			if (j - 1 >= 0 && e->board[j][i] != '.')
+			{
+				weight += count_horizontal(e, i, j, c);
+				weight += count_vertical(e, i, j, c);
+				weight += count_diagonal_left(e, i, j, c);
+				weight += count_diagonal_right(e, i, j, c);
+			}
+		}
+		i++;
+	}
 	return (weight);
+}
+
+int     count_horizontal(t_env *e, int i, int j, char c)
+{
+	int		k;
+	int		sum;
+	char	cn;
+
+	k = 1;
+	sum = 0;
+	cn = (c == 'X' ? 'O' : 'X');
+	while (i + k < e->width && e->board[j][i + k] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	k = 1;
+	while (i + k < e->width && e->board[j][i + k] == cn)
+	{
+		sum -= 10;
+		k++;
+	}
+	return (sum);
+}
+
+int     count_vertical(t_env *e, int i, int j, char c)
+{
+	int		k;
+	int		sum;
+	char	cn;
+
+	k = 1;
+	sum = 0;
+	cn = (c == 'X' ? 'O' : 'X');
+	while (j + k < e->height && e->board[j + k][i] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	k = 1;
+	while (j + k < e->height && e->board[j + k][i] == cn)
+	{
+		sum -= 10;
+		k++;
+	}
+	return (sum);
+}
+
+int     count_diagonal_left(t_env *e, int i, int j, char c)
+{
+	int	k;
+	int	sum;
+
+	k = 1;
+	sum = 0;
+	while (j + k < e->height && i - k > 0 && e->board[j + k][i - k] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	k = 1;
+	while (j - k > 0 && i - k > 0 && e->board[j - k][i - k] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	return (sum);
+}
+
+int     count_diagonal_right(t_env *e, int i, int j, char c)
+{
+	int	k;
+	int	sum;
+
+	k = 1;
+	sum = 0;
+	while (j + k < e->height && i + k < e->width - 1 &&
+			e->board[j + k][i + k] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	k = 1;
+	while (j - k > 0 && i + k < e->width - 1 && e->board[j - k][i + k] == c)
+	{
+		sum += 10;
+		k++;
+	}
+	return (sum);
 }

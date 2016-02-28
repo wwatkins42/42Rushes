@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 17:15:32 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 18:20:16 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ int				max(t_env *e, int p, int depth);
 **	evaluate.c
 */
 
-int				evaluate(t_env *e, int move);
-int				get_height(t_env *e, int move);
-int				weight_horizontal(t_env *e, int j, int move);
-int				weight_vertical(t_env *e, int j, int move);
-int				weight_diagonal_left(t_env *e, int j, int move);
-int				weight_diagonal_right(t_env *e, int j, int move);
+int				evaluate(t_env *e, int p);
+int				count_horizontal(t_env *e, int i, int j, char c);
+int				count_vertical(t_env *e, int i, int j, char c);
+int				count_diagonal_left(t_env *e, int i, int j, char c);
+int				count_diagonal_right(t_env *e, int i, int j, char c);
 
 #endif
