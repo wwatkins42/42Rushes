@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:03:42 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 16:55:10 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:57:49 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int		args_get(t_env *e, int argc, char **argv)
 	i = 0;
 	if (argc != 3)
 		return (-1);
-	e->width = ft_atof(argv[1]);
-	e->height = ft_atof(argv[2]);
+	e->w = ft_atof(argv[1]);
+	e->h = ft_atof(argv[2]);
 	while (argv[++i])
 	{
 		if (str_isdigit(argv[i]) == -1)
 			return (-1);
 		argv[i]++;
 	}
-	if (e->width < 7 || e->width > MAX_INT ||
-		e->height < 6 || e->height > MAX_INT)
+	if (e->w < 7 || e->w > MAX_INT ||
+		e->h < 6 || e->h > MAX_INT)
 		return (-1);
-	e->width > 100 ? e->width = 100 : 0;
-	e->height > 100 ? e->height = 100 : 0;
-	return (1);
+	e->w > 100 ? e->w = 100 : 0;
+	e->h > 100 ? e->h = 100 : 0;
+	return (0);
 }
 
-int     str_isdigit(char *str)
+int		str_isdigit(char *str)
 {
 	int i;
 

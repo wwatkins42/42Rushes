@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:45:29 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 21:02:13 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <libft.h>
 # include <time.h>
-# include <stdio.h> // TEMP
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
@@ -28,16 +27,13 @@
 # define MAX_DEPTH 5
 # define MAX_VALUE 1000
 
-enum { HUMAN, AI };
-
 typedef struct	s_env
 {
 	char	**board;
-	int		*moves;
-	int		width;
-	int		height;
-	int		input;
+	int		w;
+	int		h;
 	int		j;
+	int		input;
 	short	game;
 }				t_env;
 
@@ -53,9 +49,9 @@ int				str_isdigit(char *str);
 */
 
 int				board_create(t_env *e);
-int				board_insert(t_env *e, int input, int p);
-int				board_delete(t_env *e, int input);
-int				board_disp(t_env *e, char **board);
+void			board_insert(t_env *e, int input, int p);
+void			board_delete(t_env *e, int input);
+void			board_disp(t_env *e, char **board);
 void			set_color(int i);
 
 /*

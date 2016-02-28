@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:34:27 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 17:16:18 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 21:04:01 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,81 +18,70 @@ int		board_create(t_env *e)
 	int	j;
 
 	i = -1;
-	if ((e->board = (char**)malloc(sizeof(char*) * e->height)) == NULL)
+	if ((e->board = (char**)malloc(sizeof(char*) * e->h)) == NULL)
 		return (-1);
-	while (++i < e->height)
+	while (++i < e->h)
 	{
-		if ((e->board[i] = (char*)malloc(sizeof(char) * e->width)) == NULL)
+		if ((e->board[i] = (char*)malloc(sizeof(char) * e->w)) == NULL)
 			return (-1);
 		j = -1;
-		while (++j < e->width)
+		while (++j < e->w)
 			e->board[i][j] = '.';
 	}
-	if ((e->moves = (int*)malloc(sizeof(int) * MAX_DEPTH)) == NULL)
-		return (-1);
-	i = -1;
-	while (++i < MAX_DEPTH)
-		e->moves[i] = -1;
 	return (0);
 }
 
-int		board_insert(t_env *e, int input, int p)
+void	board_insert(t_env *e, int input, int p)
 {
 	int j;
 
 	j = 0;
-	while (j < e->height && e->board[j][input] == '.')
+	while (j < e->h && e->board[j][input] == '.')
 		j++;
 	if (j - 1 >= 0)
 	{
 		p == 2 ? e->board[j - 1][input] = 'X' : 0;
 		p == 1 ? e->board[j - 1][input] = 'O' : 0;
 	}
-	return (0);
 }
 
-int		board_delete(t_env *e, int input)
+void	board_delete(t_env *e, int input)
 {
 	int j;
 
 	j = 0;
-	while (j < e->height && e->board[j][input] == '.')
+	while (j < e->h && e->board[j][input] == '.')
 		j++;
 	e->board[j][input] = '.';
-	return (0);
 }
 
-int		board_disp(t_env *e, char **board)
+void	board_disp(t_env *e, char **board)
 {
 	int	i;
 	int	j;
 
 	j = -1;
-	while (++j < e->height + 1)
+	while (++j < e->h + 1)
 	{
 		i = -1;
-		while (++i < e->width)
+		while (++i < e->w)
 		{
 			if (j == 0)
 			{
 				set_color(i);
 				ft_putnbr(i % 10);
-				ft_putstr(COLR_END);
 			}
 			else
 			{
-				if (board[j - 1][i] == 'X')
-					ft_putstr(COLR_RED);
-				if (board[j - 1][i] == 'O')
-					ft_putstr(COLR_YELLOW);
+				board[j - 1][i] == 'X' ? ft_putstr(COLR_RED) : 0;
+				board[j - 1][i] == 'O' ? ft_putstr(COLR_YELLOW) : 0;
 				ft_putchar(board[j - 1][i]);
-				ft_putstr(COLR_END);
 			}
-			i < e->width - 1 ? ft_putstr("  ") : 0;
+			ft_putstr(COLR_END);
+			i < e->w - 1 ? ft_putstr("  ") : 0;
 		}
 		ft_putchar('\n');
 	}
-	return (0);
 }
 
 void	set_color(int i)

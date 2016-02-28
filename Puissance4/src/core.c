@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 11:11:40 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:46:26 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:52:37 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		get_input(t_env *e)
 	while (get_next_line(0, &line) > 0)
 	{
 		e->input = ft_atoi(line);
-		if (str_isdigit(line) == -1 || e->input < 0 || e->input > e->width - 1)
+		if (str_isdigit(line) == -1 || e->input < 0 || e->input > e->w - 1)
 		{
 			ft_putstr("invalid input\n");
 			ft_strdel(&line);

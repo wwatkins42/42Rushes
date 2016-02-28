@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 20:46:45 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 20:51:47 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		minimax(t_env *e, int depth)
 
 	i = -1;
 	bestvalue = -MAX_VALUE;
-	while (++i < e->width)
+	while (++i < e->w)
 	{
 		if (e->board[0][i] == '.')
 		{
@@ -47,13 +47,13 @@ int		min(t_env *e, int p, int depth)
 
 	i = -1;
 	if (depth == 0 && check_win(e, p) == 0)
-		return(evaluate(e));
+		return (evaluate(e));
 	else if (check_win(e, p) == 1)
 		return (-MAX_VALUE + (MAX_DEPTH - depth) * 10);
 	else
 	{
 		vmin = MAX_VALUE;
-		while (++i < e->width)
+		while (++i < e->w)
 		{
 			if (e->board[0][i] == '.')
 			{
@@ -75,13 +75,13 @@ int		max(t_env *e, int p, int depth)
 
 	i = -1;
 	if (depth == 0 && check_win(e, p) == 0)
-		return(evaluate(e));
+		return (evaluate(e));
 	else if (check_win(e, p) == 1)
 		return (MAX_VALUE - (MAX_DEPTH - depth) * 10);
 	else
 	{
 		vmax = -MAX_VALUE;
-		while (++i < e->width)
+		while (++i < e->w)
 		{
 			if (e->board[0][i] == '.')
 			{
