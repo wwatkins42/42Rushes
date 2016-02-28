@@ -6,36 +6,40 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:02 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 17:06:28 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 11:26:39 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "puissance4.h"
 
-int		check_win(t_env *e, short player)
+int		check_win(t_env *e, int p)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
-	(void)player;
+	c = (p == 1 ? 'O' : 'X');
 	j = -1;
 	while (++j < e->height)
 	{
 		i = -1;
 		while (++i < e->width)
 		{
-			if (i < e->width - 3 && e->board[j][i] != '.')
-				if (check_horizontal(e, i, j, e->board[j][i]))
-					return (1);
-			if (j < e->height - 3 && e->board[j][i] != '.')
-				if (check_vertical(e, i, j, e->board[j][i]))
-					return (1);
-			if (j < e->height - 3 && i > 3 && e->board[j][i] != '.')
-				if (check_diagonal_left(e, i, j, e->board[j][i]))
-					return (1);
-			if (j < e->height - 3 && i < e->width - 3 && e->board[j][i] != '.')
-				if (check_diagonal_right(e, i, j, e->board[j][i]))
-					return (1);
+			if (e->board[j][i] == c)
+			{
+				if (i < e->width - 3)
+					if (check_horizontal(e, i, j, c))
+						return (p);
+				if (j < e->height - 3)
+					if (check_vertical(e, i, j, c))
+						return (p);
+				if (j < e->height - 3 && i > 3)
+					if (check_diagonal_left(e, i, j, c))
+						return (p);
+				if (j < e->height - 3 && i < e->width - 3)
+					if (check_diagonal_right(e, i, j, c))
+						return (p);
+			}
 		}
 	}
 	return (0);

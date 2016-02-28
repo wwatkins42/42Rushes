@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:34:27 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 18:22:02 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 11:07:57 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,26 @@ int		board_create(t_env *e)
 	return (0);
 }
 
-int		board_insert(t_env *e, int input, char **board, short player)
+int		board_insert(t_env *e, int input, short player)
 {
-	int	j;
+	int j;
 
 	j = 0;
-	if (board[0][input] != '.')
-		return (-1);
-	while (j < e->height - 1)
-	{
-		if (board[j][input] != '.')
-			break ;
+	while (j < e->height && e->board[j][input] == '.')
 		j++;
-	}
-	board[j][input] != '.' ? j-- : 0;
-	board[j][input] = (player == HUMAN ? 'O' : 'X');
-	return (j);
+	if (j - 1 >= 0)
+		e->board[j - 1][input] = (player == AI ? 'X' : '0');
+	return (0);
 }
 
-int		board_delete(t_env *e, int j, int input, char **board)
+int		board_delete(t_env *e, int input)
 {
-	(void)e;
-	j < 0 ? j = 0 : 0;
-	input < 0 ? input = 0 : 0;
-	board[j][input] = '.';
+	int j;
+
+	j = 0;
+	while (j < e->height && e->board[j][input] == '.')
+		j++;
+	e->board[j][input] = '.';
 	return (0);
 }
 
@@ -99,7 +95,14 @@ int		board_disp(t_env *e, char **board)
 				ft_putstr(COLR_END);
 			}
 			else
+			{
+				if (board[j - 1][i] == 'X')
+					ft_putstr(COLR_RED);
+				if (board[j - 1][i] == '0')
+					ft_putstr(COLR_YELLOW);
 				ft_putchar(board[j - 1][i]);
+				ft_putstr(COLR_END);
+			}
 			i < e->width - 1 ? ft_putchar(' ') : 0;
 		}
 		ft_putchar('\n');

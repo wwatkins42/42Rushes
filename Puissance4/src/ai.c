@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 19:01:27 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 11:29:30 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,117 +16,89 @@ int		ai_algorithm(t_env *e)
 {
 	int	input;
 
-	input = minimax(e, 0, 0, MAX_DEPTH, 1);
-	return (input);
+	input = minimax(e, MAX_DEPTH);
+	//board_insert(e, input, AI);
+	return (0);
 }
 
-int		minimax(t_env *e, int move, int j, int depth, int maximizing)
-{
-	int	i;
-	int	v;
-	int	best_value;
-
-	i = 0;
-	if (depth == 0 || check_win(e, AI))
-		return (evaluate(e, j, move));
-	if (maximizing)
-	{
-		best_value = -1000;
-		while (i < e->width)
-		{
-			j = board_insert(e, i, e->board, AI);
-			v = minimax(e, i, j, depth - 1, 0);
-			best_value = (best_value > v ? best_value : v);
-			board_delete(e, j, move, e->board);
-			i++;
-		}
-		return (best_value);
-	}
-	else
-	{
-		best_value = 1000;
-		while (i < e->width)
-		{
-			j = board_insert(e, i, e->board, HUMAN);
-			v = minimax(e, i, j, depth - 1, 1);
-			best_value = (best_value < v ? best_value : v);
-			board_delete(e, j, move, e->board);
-			i++;
-		}
-		return (best_value);
-	}
-}
-
-/*
 int		minimax(t_env *e, int depth)
 {
 	int i;
-	int	maxime;
-	int	val_fils;
-	int	coup;
+	int	v;
+	int	bestvalue;
+	int	move;
 
 	i = -1;
-	maxime = -2000;
+	bestvalue = -MAX_VALUE;
 	while (++i < e->width)
 	{
-		val_fils = min(e, i, depth);
-		if (val_fils > maxime)
+		if (e->board[0][i] == '.')
 		{
-			maxime = val_fils;
-			coup = i;
+			board_insert(e, i, 2);
+			v = min(e, 1, depth);
+			if (v > bestvalue)
+			{
+				bestvalue = v;
+				move = i;
+			}
+			board_delete(e, i);
 		}
 	}
-	return (coup);
+	return (move);
 }
 
-int		min(t_env *e, int move, int depth)
+int		min(t_env *e, int p, int depth)
 {
 	int	i;
-	int	j;
-	int	v_fils;
-	int v_min;
+	int	v;
+	int vmin;
 
 	i = 0;
-	e->moves[MAX_DEPTH - depth - 1] = move;
-	if (depth == 0)
-		return (evaluate(e, move));
+	if (depth == 0 || check_win(e, p) == p)
+		return (-MAX_VALUE);
+	//	return (evaluate(e, move));
 	else
 	{
-		v_min = 2000;
-		j = board_insert(e, move, e->board, AI);
+		vmin = MAX_VALUE;
 		while (i < e->width)
 		{
-			v_fils = max(e, i, depth - 1);
-			v_min = (v_min < v_fils ? v_min : v_fils);
+			if (e->board[0][i] == '.')
+			{
+				board_insert(e, i, p);
+				v = max(e, p % 2 + 1, depth - 1);
+				vmin = (vmin < v ? vmin : v);
+				board_delete(e, i);
+			}
 			i++;
 		}
-		board_delete(e, j, move, e->board);
 	}
-	return (v_min);
+	return (vmin);
 }
 
-int		max(t_env *e, int move, int depth)
+int		max(t_env *e, int p, int depth)
 {
 	int	i;
-	int	j;
-	int	v_fils;
-	int	v_max;
+	int	v;
+	int	vmax;
 
 	i = 0;
-	e->moves[MAX_DEPTH - depth - 1] = move;
-	if (depth == 0)
-		return (evaluate(e, move));
+	if (depth == 0 || check_win(e, p) == p)
+		return (MAX_VALUE);
+	//	return (evaluate(e, move));
 	else
 	{
-		v_max = -2000;
-		j = board_insert(e, move, e->board, AI);
+		v = -MAX_VALUE;
 		while (i < e->width)
 		{
-			v_fils = min(e, i, depth - 1);
-			v_max = (v_max > v_fils ? v_max : v_fils);
+			if (e->board[0][i] == '.')
+			{
+				board_insert(e, i, p);
+				v = min(e, p % 2 + 1, depth - 1);
+				vmax = (vmax > v ? vmax : v);
+				board_delete(e, i);
+			}
 			i++;
 		}
-		board_delete(e, j, move, e->board);
 	}
-	return (v_max);
-}*/
+	return (vmax);
+}

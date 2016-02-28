@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/27 19:01:14 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 11:23:00 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 # define COLR_BLUE "\e[34m"
+# define COLR_RED "\e[31m"
+# define COLR_YELLOW "\e[33m"
 # define COLR_END "\e[0m"
-# define MAX_DEPTH 2
+# define MAX_DEPTH 5
+# define MAX_VALUE 1000
 
 enum { HUMAN, AI };
 
@@ -50,8 +53,8 @@ int				str_isdigit(char *str);
 */
 
 int				board_create(t_env *e);
-int				board_insert(t_env *e, int input, char **board, short player);
-int				board_delete(t_env *e, int j, int input, char **board);
+int				board_insert(t_env *e, int input, short player);
+int				board_delete(t_env *e, int input);
 char			**board_copy(t_env *e, char **board);
 int				board_disp(t_env *e, char **board);
 void			set_color(int i);
@@ -69,7 +72,7 @@ int				get_input(t_env *e);
 **	check_win.c
 */
 
-int				check_win(t_env *e, short player);
+int				check_win(t_env *e, int p);
 int				check_horizontal(t_env *e, int i, int j, char c);
 int				check_vertical(t_env *e, int i, int j, char c);
 int				check_diagonal_left(t_env *e, int i, int j, char c);
@@ -80,15 +83,16 @@ int				check_diagonal_right(t_env *e, int i, int j, char c);
 */
 
 int				ai_algorithm(t_env *e);
-int				minimax(t_env *e, int move, int j, int depth, int maximizing);
-int				min(t_env *e, int move, int depth);
-int				max(t_env *e, int move, int depth);
+int				minimax(t_env *e, int depth);
+int				min(t_env *e, int p, int depth);
+int				max(t_env *e, int p, int depth);
 
 /*
 **	evaluate.c
 */
 
-int				evaluate(t_env *e, int j, int move);
+int				evaluate(t_env *e, int move);
+int				get_height(t_env *e, int move);
 int				weight_horizontal(t_env *e, int j, int move);
 int				weight_vertical(t_env *e, int j, int move);
 int				weight_diagonal_left(t_env *e, int j, int move);
