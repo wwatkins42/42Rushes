@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 18:15:34 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 19:44:29 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		ai_algorithm(t_env *e)
 	int	input;
 
 	input = minimax(e, MAX_DEPTH);
-	board_insert(e, input, 2);
 	return (input);
 }
 
@@ -34,8 +33,8 @@ int		minimax(t_env *e, int depth)
 	{
 		if (e->board[0][i] == '.')
 		{
-			board_insert(e, i, 1);
-			v = min(e, 2, depth);
+			board_insert(e, i, 2);
+			v = min(e, 1, depth);
 			printf("%d: %d\n", i, v);
 			if (v > bestvalue)
 			{
@@ -45,6 +44,7 @@ int		minimax(t_env *e, int depth)
 			board_delete(e, i);
 		}
 	}
+	board_insert(e, move, 2);
 	return (move);
 }
 
@@ -56,8 +56,8 @@ int		min(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 && check_win(e, p) == 0)
-		return(-evaluate(e, p));
-	else if (check_win(e, p) == p)
+		return(evaluate(e));
+	else if (check_win(e, p) == 1)
 		return (-MAX_VALUE + (MAX_DEPTH - depth) * 10);
 	else
 	{
@@ -86,8 +86,8 @@ int		max(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 && check_win(e, p) == 0)
-		return(evaluate(e, p));
-	else if (depth >= 0 && check_win(e, p) == p)
+		return(evaluate(e));
+	else if (check_win(e, p) == 1)
 		return (MAX_VALUE - (MAX_DEPTH - depth) * 10);
 	else
 	{

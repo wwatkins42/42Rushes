@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 18:20:16 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 19:30:24 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define COLR_RED "\e[31m"
 # define COLR_YELLOW "\e[33m"
 # define COLR_END "\e[0m"
-# define MAX_DEPTH 6
+# define MAX_DEPTH 5
 # define MAX_VALUE 1000
 
 enum { HUMAN, AI };
@@ -91,10 +91,10 @@ int				max(t_env *e, int p, int depth);
 **	evaluate.c
 */
 
-int				evaluate(t_env *e, int p);
-int				count_horizontal(t_env *e, int i, int j, char c);
-int				count_vertical(t_env *e, int i, int j, char c);
-int				count_diagonal_left(t_env *e, int i, int j, char c);
-int				count_diagonal_right(t_env *e, int i, int j, char c);
+int				evaluate(t_env *e);
+int				count_horizontal(t_env *e, int i, int j);
+int				count_vertical(t_env *e, int i, int j);
+int				count_diagonal_left(t_env *e, int i, int j);
+int				count_diagonal_right(t_env *e, int i, int j);
 
 #endif
