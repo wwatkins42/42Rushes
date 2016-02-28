@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 12:12:00 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 13:18:43 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		ai_algorithm(t_env *e)
 	int	input;
 
 	input = minimax(e, MAX_DEPTH);
+	board_insert(e, input, 2);
 	return (0);
 }
 
@@ -43,10 +44,10 @@ int		minimax(t_env *e, int depth)
 			board_delete(e, i);
 		}
 	}
-	if (bestvalue == -MAX_VALUE)
+/*	if (bestvalue == -MAX_VALUE)
 		minimax(e, depth - 1);
 	else
-		board_insert(e, move, 2);
+		board_insert(e, move, 2);*/
 	return (move);
 }
 
@@ -58,8 +59,8 @@ int		min(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 || check_win(e, p) == p)
-		return (-MAX_VALUE);
-	//	return (evaluate(e, move));
+		//return (-MAX_VALUE);
+		return(-evaluate(e, e->prev));
 	else
 	{
 		vmin = MAX_VALUE;
@@ -68,6 +69,7 @@ int		min(t_env *e, int p, int depth)
 			if (e->board[0][i] == '.')
 			{
 				board_insert(e, i, p);
+				e->prev = i;
 				v = max(e, p % 2 + 1, depth - 1);
 				vmin = (vmin < v ? vmin : v);
 				board_delete(e, i);
@@ -86,8 +88,8 @@ int		max(t_env *e, int p, int depth)
 
 	i = 0;
 	if (depth == 0 || check_win(e, p) == p)
-		return (MAX_VALUE);
-	//	return (evaluate(e, move));
+		//return (MAX_VALUE);
+		return(evaluate(e, e->prev));
 	else
 	{
 		v = -MAX_VALUE;
@@ -96,6 +98,7 @@ int		max(t_env *e, int p, int depth)
 			if (e->board[0][i] == '.')
 			{
 				board_insert(e, i, p);
+				e->prev = i;
 				v = min(e, p % 2 + 1, depth - 1);
 				vmax = (vmax > v ? vmax : v);
 				board_delete(e, i);

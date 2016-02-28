@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 12:01:36 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 13:06:21 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_env
 	int		height;
 	int		input;
 	int		j;
+	int		prev;
 	short	game;
 }				t_env;
 
