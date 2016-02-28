@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 11:29:30 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 12:12:00 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		ai_algorithm(t_env *e)
 	int	input;
 
 	input = minimax(e, MAX_DEPTH);
-	//board_insert(e, input, AI);
 	return (0);
 }
 
@@ -34,8 +33,8 @@ int		minimax(t_env *e, int depth)
 	{
 		if (e->board[0][i] == '.')
 		{
-			board_insert(e, i, 2);
-			v = min(e, 1, depth);
+			board_insert(e, i, 1);
+			v = min(e, 2, depth);
 			if (v > bestvalue)
 			{
 				bestvalue = v;
@@ -44,6 +43,10 @@ int		minimax(t_env *e, int depth)
 			board_delete(e, i);
 		}
 	}
+	if (bestvalue == -MAX_VALUE)
+		minimax(e, depth - 1);
+	else
+		board_insert(e, move, 2);
 	return (move);
 }
 

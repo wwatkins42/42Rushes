@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:34:27 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 11:07:57 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 11:42:13 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		board_create(t_env *e)
 	return (0);
 }
 
-int		board_insert(t_env *e, int input, short player)
+int		board_insert(t_env *e, int input, int p)
 {
 	int j;
 
@@ -44,7 +44,10 @@ int		board_insert(t_env *e, int input, short player)
 	while (j < e->height && e->board[j][input] == '.')
 		j++;
 	if (j - 1 >= 0)
-		e->board[j - 1][input] = (player == AI ? 'X' : '0');
+	{
+		p == 2 ? e->board[j - 1][input] = 'X' : 0;
+		p == 1 ? e->board[j - 1][input] = 'O' : 0;
+	}
 	return (0);
 }
 

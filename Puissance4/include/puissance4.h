@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 09:06:49 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 11:23:00 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 12:01:36 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define COLR_RED "\e[31m"
 # define COLR_YELLOW "\e[33m"
 # define COLR_END "\e[0m"
-# define MAX_DEPTH 5
+# define MAX_DEPTH 4
 # define MAX_VALUE 1000
 
 enum { HUMAN, AI };
@@ -53,7 +53,7 @@ int				str_isdigit(char *str);
 */
 
 int				board_create(t_env *e);
-int				board_insert(t_env *e, int input, short player);
+int				board_insert(t_env *e, int input, int p);
 int				board_delete(t_env *e, int input);
 char			**board_copy(t_env *e, char **board);
 int				board_disp(t_env *e, char **board);

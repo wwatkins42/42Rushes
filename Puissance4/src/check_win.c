@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:02 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 11:26:39 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 12:11:16 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		check_win(t_env *e, int p)
 				if (j < e->height - 3)
 					if (check_vertical(e, i, j, c))
 						return (p);
-				if (j < e->height - 3 && i > 3)
+				if (j < e->height - 3 && i > 2)
 					if (check_diagonal_left(e, i, j, c))
 						return (p);
 				if (j < e->height - 3 && i < e->width - 3)
