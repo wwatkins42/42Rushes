@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 17:19:33 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 13:17:40 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 17:14:46 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		evaluate(t_env *e, int move)
 	weight = 0;
 	j = get_height(e, move);
 	weight = weight_horizontal(e, j, move);
-	return (MAX_VALUE - weight);
+	return (weight);
 }
 
 int		get_height(t_env *e, int move)

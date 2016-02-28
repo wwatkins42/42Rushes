@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:34:27 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 11:42:13 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 17:16:18 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,6 @@ int		board_delete(t_env *e, int input)
 	return (0);
 }
 
-char	**board_copy(t_env *e, char **board)
-{
-	int     i;
-	int     j;
-	char	**copy;
-
-	i = -1;
-	copy = (char**)malloc(sizeof(char*) * e->height);
-	while (++i < e->height)
-	{
-		copy[i] = (char*)malloc(sizeof(char) * e->width);
-		j = -1;
-		while (++j < e->width)
-			copy[i][j] = board[i][j];
-	}
-	return (copy);
-}
-
 int		board_disp(t_env *e, char **board)
 {
 	int	i;
@@ -101,12 +83,12 @@ int		board_disp(t_env *e, char **board)
 			{
 				if (board[j - 1][i] == 'X')
 					ft_putstr(COLR_RED);
-				if (board[j - 1][i] == '0')
+				if (board[j - 1][i] == 'O')
 					ft_putstr(COLR_YELLOW);
 				ft_putchar(board[j - 1][i]);
 				ft_putstr(COLR_END);
 			}
-			i < e->width - 1 ? ft_putchar(' ') : 0;
+			i < e->width - 1 ? ft_putstr("  ") : 0;
 		}
 		ft_putchar('\n');
 	}

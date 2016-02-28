@@ -6,7 +6,7 @@
 /*   By: wwatkins <wwatkins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 14:12:54 by wwatkins          #+#    #+#             */
-/*   Updated: 2016/02/28 13:18:43 by wwatkins         ###   ########.fr       */
+/*   Updated: 2016/02/28 17:17:27 by wwatkins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ int		minimax(t_env *e, int depth)
 			board_delete(e, i);
 		}
 	}
-/*	if (bestvalue == -MAX_VALUE)
-		minimax(e, depth - 1);
-	else
-		board_insert(e, move, 2);*/
 	return (move);
 }
 
@@ -58,9 +54,11 @@ int		min(t_env *e, int p, int depth)
 	int vmin;
 
 	i = 0;
-	if (depth == 0 || check_win(e, p) == p)
-		//return (-MAX_VALUE);
-		return(-evaluate(e, e->prev));
+	if (depth == 0 && check_win(e, p) == 0)
+		return (0);
+		//return(evaluate(e, e->prev));
+	else if (check_win(e, p) == p)
+		return (-MAX_VALUE + (MAX_DEPTH - depth));
 	else
 	{
 		vmin = MAX_VALUE;
@@ -87,9 +85,11 @@ int		max(t_env *e, int p, int depth)
 	int	vmax;
 
 	i = 0;
-	if (depth == 0 || check_win(e, p) == p)
-		//return (MAX_VALUE);
-		return(evaluate(e, e->prev));
+	if (depth == 0 && check_win(e, p) == 0)
+		return (0);
+		//return(evaluate(e, e->prev));
+	else if (check_win(e, p) == p)
+		return (MAX_VALUE - (MAX_DEPTH - depth));
 	else
 	{
 		v = -MAX_VALUE;
